@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2439305F22F2A7180034EF39 /* UdacityAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2439305E22F2A7180034EF39 /* UdacityAPIClient.swift */; };
+		2439306122F2B8A40034EF39 /* LoginOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2439306022F2B8A40034EF39 /* LoginOutput.swift */; };
+		2439306322F2B8C70034EF39 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2439306222F2B8C70034EF39 /* Account.swift */; };
+		2439306522F2B9010034EF39 /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2439306422F2B9010034EF39 /* UserSession.swift */; };
 		247B70D622F1565600D6FEDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247B70D522F1565600D6FEDD /* AppDelegate.swift */; };
 		247B70D822F1565600D6FEDD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247B70D722F1565600D6FEDD /* LoginViewController.swift */; };
 		247B70DB22F1565600D6FEDD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 247B70D922F1565600D6FEDD /* Main.storyboard */; };
@@ -15,6 +19,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2439305E22F2A7180034EF39 /* UdacityAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityAPIClient.swift; sourceTree = "<group>"; };
+		2439306022F2B8A40034EF39 /* LoginOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOutput.swift; sourceTree = "<group>"; };
+		2439306222F2B8C70034EF39 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		2439306422F2B9010034EF39 /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
 		247B70D222F1565600D6FEDD /* OnTheMap_MyProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap_MyProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		247B70D522F1565600D6FEDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		247B70D722F1565600D6FEDD /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -35,9 +43,53 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2439305922F2A6B60034EF39 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2439305D22F2A6E10034EF39 /* Response */,
+				2439305C22F2A6DC0034EF39 /* Requests */,
+				2439305B22F2A6D60034EF39 /* Client */,
+				2439305A22F2A6BF0034EF39 /* Data */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2439305A22F2A6BF0034EF39 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		2439305B22F2A6D60034EF39 /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				2439305E22F2A7180034EF39 /* UdacityAPIClient.swift */,
+			);
+			path = Client;
+			sourceTree = "<group>";
+		};
+		2439305C22F2A6DC0034EF39 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		2439305D22F2A6E10034EF39 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				2439306022F2B8A40034EF39 /* LoginOutput.swift */,
+				2439306222F2B8C70034EF39 /* Account.swift */,
+				2439306422F2B9010034EF39 /* UserSession.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
 		247B70C922F1565600D6FEDD = {
 			isa = PBXGroup;
 			children = (
+				2439305922F2A6B60034EF39 /* Model */,
 				247B70D422F1565600D6FEDD /* OnTheMap_MyProject */,
 				247B70D322F1565600D6FEDD /* Products */,
 			);
@@ -151,8 +203,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2439306322F2B8C70034EF39 /* Account.swift in Sources */,
 				247B70D822F1565600D6FEDD /* LoginViewController.swift in Sources */,
 				247B70D622F1565600D6FEDD /* AppDelegate.swift in Sources */,
+				2439306522F2B9010034EF39 /* UserSession.swift in Sources */,
+				2439306122F2B8A40034EF39 /* LoginOutput.swift in Sources */,
+				2439305F22F2A7180034EF39 /* UdacityAPIClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

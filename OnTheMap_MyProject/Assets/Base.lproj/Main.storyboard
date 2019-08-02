@@ -46,7 +46,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mp4-bD-40j">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mp4-bD-40j">
                                         <rect key="frame" x="0.0" y="100" width="235" height="40"/>
                                         <color key="backgroundColor" red="0.0078431372550000003" green="0.70196078429999997" blue="0.89411764709999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -57,6 +57,9 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="titleShadowColor" red="0.098039215686274508" green="0.5725490196078431" blue="0.71372549019607845" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="handleLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cny-UJ-M0g"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -67,24 +70,37 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="dHX-Rf-21s">
+                                <rect key="frame" x="107.5" y="253.5" width="160" height="160"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="W8A-UE-Sq4"/>
+                                    <constraint firstAttribute="height" constant="160" id="bw8-6G-ywt"/>
+                                </constraints>
+                                <color key="color" red="0.0078431372550000003" green="0.70196078429999997" blue="0.89411764709999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="omH-YY-cY0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="5" id="1MF-de-oPr"/>
                             <constraint firstItem="Iey-FZ-kqQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="70" id="28N-6n-gPp" userLabel="Stack View.leading = Safe Area.leading + 80"/>
                             <constraint firstItem="ZQ0-81-zwA" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3wE-U5-B4Q"/>
+                            <constraint firstItem="dHX-Rf-21s" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="BEz-2T-m9d"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Iey-FZ-kqQ" secondAttribute="trailing" constant="70" id="HZv-DB-PHK" userLabel="Safe Area.trailing = Stack View.trailing + 80"/>
                             <constraint firstItem="ZQ0-81-zwA" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="80" id="IpX-tb-5ai"/>
                             <constraint firstItem="Iey-FZ-kqQ" firstAttribute="top" secondItem="ZQ0-81-zwA" secondAttribute="bottom" constant="50" id="R2s-mI-hrU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="omH-YY-cY0" secondAttribute="bottom" constant="92" id="geu-KI-Dta"/>
+                            <constraint firstItem="dHX-Rf-21s" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="n2E-va-JFb"/>
                             <constraint firstItem="omH-YY-cY0" firstAttribute="top" secondItem="Iey-FZ-kqQ" secondAttribute="bottom" constant="50" id="nMs-mZ-DR2"/>
                             <constraint firstItem="omH-YY-cY0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="80" id="ugW-NH-hf9"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="dHX-Rf-21s" id="avz-ga-G7Z"/>
                         <outlet property="loginButton" destination="Mp4-bD-40j" id="wWk-P4-Er5"/>
+                        <outlet property="passwordTextField" destination="3T1-L2-S8k" id="VHg-X7-lQ4"/>
                         <outlet property="signUpCompleteLabel" destination="omH-YY-cY0" id="JWj-xe-z3q"/>
+                        <outlet property="userNameTextField" destination="HVI-3o-HQl" id="Owm-Ez-e2r"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

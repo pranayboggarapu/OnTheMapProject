@@ -11,14 +11,63 @@ import UIKit
 class LoginViewController: UIViewController {
 
     @IBOutlet weak var loginButton: UIButton!
-    
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var signUpCompleteLabel: UITextView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
         loginButton.layer.cornerRadius = 5
         setupSignUpLink()
+        
+        setLoggingIn(false)
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    @IBAction func handleLogin(_ sender: Any) {
+        print("handle login called")
+        setLoggingIn(true)
+        if userNameTextField.text == "" || passwordTextField.text == "" {
+            displayErrorMessage(errorTitle: "Missing Credentials!!", errorMessage: "UserName/Password not entered.")
+            setLoggingIn(false)
+            return
+        }
+        UdacityAPIClient.validateLogin(userName: userNameTextField.text!, password: passwordTextField.text!, completionHandler: validateLoginResponse)
+    }
+    
+    func displayErrorMessage(errorTitle: String, errorMessage: String) {
+        let alert = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func setLoggingIn(_ loggingIn: Bool) {
+        if loggingIn {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
+        userNameTextField.isEnabled = !loggingIn
+        passwordTextField.isEnabled = !loggingIn
+        loginButton.isEnabled = !loggingIn
+        signUpCompleteLabel.isEditable = !loggingIn
+    }
+    
+    func validateLoginResponse(success: Bool, loginOutput: LoginOutput?, error: Error?) {
+        setLoggingIn(false)
+        if success {
+            if !(loginOutput?.account.isUserRegistered)! {
+                displayErrorMessage(errorTitle: "UnRegistered User", errorMessage: "User not registered")
+            }
+            UdacityAPIClient.UserAuth.accountId = (loginOutput?.account.userKey)!
+            UdacityAPIClient.UserAuth.sessionId = (loginOutput?.session.sessionId)!
+            print("User successfully authenticated")
+        } else {
+            displayErrorMessage(errorTitle: "Error", errorMessage: "An unforeseen error occured. Please try again!!")
+        }
     }
 }
 
