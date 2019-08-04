@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class StudentLocationMapViewController: UIViewController, MKMapViewDelegate {
+class StudentLocationMapViewController: UIViewController {
     
     //MARK:- Outlets
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
@@ -90,35 +90,6 @@ class StudentLocationMapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    // MARK: - MKMapViewDelegate
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        
-        let reuseId = "pin"
-        
-        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
-        
-        if pinView == nil {
-            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-            pinView!.canShowCallout = true
-            pinView!.pinTintColor = .red
-            pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-        }
-        else {
-            pinView!.annotation = annotation
-        }
-        
-        return pinView
-    }
-    
-    //MARK:- MapView tap functionality
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        if control == view.rightCalloutAccessoryView {
-            if let toOpen = view.annotation?.subtitle! {
-                openExternalLink(toOpen)
-            }
-        }
-    }
-    
     //MARK:- Refresh button press
     override func refreshButtonPressed() {
         setLoading(true)
@@ -149,11 +120,38 @@ class StudentLocationMapViewController: UIViewController, MKMapViewDelegate {
     
     //MARK:- Spinner functionality
     func setLoading(_ isLoading: Bool) {
-        if isLoading {
-            activityIndicatorView.startAnimating()
-        } else {
-            activityIndicatorView.stopAnimating()
-        }
+        isLoading ? activityIndicatorView.startAnimating() : activityIndicatorView.stopAnimating()
     }
     
+}
+
+extension StudentLocationMapViewController: MKMapViewDelegate {
+    // MARK: - MKMapViewDelegate
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        let reuseId = "pin"
+        
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView!.canShowCallout = true
+            pinView!.pinTintColor = .red
+            pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        }
+        else {
+            pinView!.annotation = annotation
+        }
+        
+        return pinView
+    }
+    
+    //MARK:- MapView tap functionality
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control == view.rightCalloutAccessoryView {
+            if let toOpen = view.annotation?.subtitle! {
+                openExternalLink(toOpen)
+            }
+        }
+    }
 }

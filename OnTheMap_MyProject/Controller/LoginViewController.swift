@@ -83,11 +83,16 @@ class LoginViewController: UIViewController {
                 self.performSegue(withIdentifier: "loginSuccessfull", sender: nil)
             }
 
-        } else {
+        } else if error != nil && !success  {
             //service failure
             DispatchQueue.main.async {
                 self.setLoggingIn(false)
-                self.displayErrorMessage(errorTitle: "Error!!", errorMessage: "UserName/password incorrect. Please try again!!")
+                self.displayErrorMessage(errorTitle: "Error!!", errorMessage: "A network error occured. Please try again!!")
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.setLoggingIn(false)
+                self.displayErrorMessage(errorTitle: "Error!!", errorMessage: "Username/password incorrect. Please try again!!")
             }
         }
     }

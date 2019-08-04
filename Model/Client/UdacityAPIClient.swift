@@ -73,8 +73,14 @@ class UdacityAPIClient {
                 
                 completionHandler(true, response, nil)
                 return
+            } else if let errorVar = error {
+                //network failure
+                guard !errorVar.localizedDescription.contains("Internet connection appears to be offline") else {
+                    completionHandler(false,nil,errorVar)
+                    return
+                }
             }
-            completionHandler(false, nil, error)
+            completionHandler(false, nil, nil)
         }
     }
     

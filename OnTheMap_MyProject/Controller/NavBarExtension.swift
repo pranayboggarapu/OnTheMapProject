@@ -27,6 +27,6 @@ extension UIViewController {
     }
     
     @objc func addButtonPressed() {
-        performSegue(withIdentifier: "addLocation", sender: nil)
+        performSegue(withIdentifier: "addLocationFromMap", sender: nil)
     }
 }

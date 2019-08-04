@@ -27,6 +27,7 @@ class StudentLocationTableViewController: UITableViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         fetchListOfStudents()
         tableView.reloadData()
     }
@@ -97,11 +98,6 @@ class StudentLocationTableViewController: UITableViewController {
 
 //MARK:- TableView Controller to display the data
 extension StudentLocationTableViewController {
-    
-    //number of sections
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
     
     //number of rows in each setction
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
