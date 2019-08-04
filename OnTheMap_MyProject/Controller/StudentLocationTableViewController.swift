@@ -10,20 +10,18 @@ import UIKit
 
 class StudentLocationTableViewController: UITableViewController {
     
+    //MARK:- Variables declaration
     var students: StudentList?
-    
-//    var loadingView: UIView = UIView()
-    
+
     var spinner = UIActivityIndicatorView(style: .whiteLarge)
     
     
+    //MARK:- View load and appear methods
     override func viewDidLoad() {
-        spinner.color = UIColor.darkGray
         super.viewDidLoad()
-        tableView.reloadData()
+        spinner.color = UIColor.darkGray
         navigationItem.title = "On the Map"
         addNavBarButtons()
-        print("Student Location Table View Controller loaded")
         setLoadingScreen()
         fetchListOfStudents()
     }
@@ -33,28 +31,33 @@ class StudentLocationTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    func fetchListOfStudents() {
-        
-        UdacityAPIClient.getListOfStudentLocations(completionHandler: handleFetchStudentsListResponse)
-    }
-    
+    //MARK:- Handle students service response
     func handleFetchStudentsListResponse(success: Bool, students: StudentList?, error: Error?) {
+        //when success
         if success {
             self.students = students
             tableView.reloadData()
             self.removeLoadingScreen()
         } else {
+            //if fails, display the error
             displayErrorMessage(errorTitle: "Error!!", errorMessage: "An unforeseen error occured. Please try again.")
         }
         
     }
     
+    //MARK:- Refresh Button Pressed`
     override func refreshButtonPressed() {
         setLoadingScreen()
         fetchListOfStudents()
         tableView.reloadData()
     }
     
+    //MARK:- Get List of students
+    func fetchListOfStudents() {
+        UdacityAPIClient.getListOfStudentLocations(completionHandler: handleFetchStudentsListResponse)
+    }
+    
+    //MARK:- Logout
     override func logOutButtonPressed() {
         UdacityAPIClient.logOutUser { (success, error) in
             if success {
@@ -63,6 +66,7 @@ class StudentLocationTableViewController: UITableViewController {
                 }
                 
             } else {
+                //show error when service call fails
                 DispatchQueue.main.async {
                     self.displayErrorMessage(errorTitle: "Error", errorMessage: "Unable to logout. Please try again!!")
                 }
@@ -71,22 +75,15 @@ class StudentLocationTableViewController: UITableViewController {
         }
     }
     
-    // Set the activity indicator into the main view
+    //MARK:- Set the activity indicator into the main view
     private func setLoadingScreen() {
-        
         spinner = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 120, height:120))
         spinner.style = .whiteLarge
         spinner.color = UIColor.darkGray
-        
         self.spinner.center = CGPoint(x:self.view.center.x, y:self.view.center.y)
-    
         spinner.contentMode = .scaleAspectFit
-        
         spinner.startAnimating()
-        
-        
         tableView.addSubview(spinner)
-        
     }
     
     // Remove the activity indicator from the main view
@@ -96,28 +93,30 @@ class StudentLocationTableViewController: UITableViewController {
         spinner.isHidden = true
     }
     
-    override func addButtonPressed() {
-        print("Add button Pressed in Student Table View Location controller")
-        let addStudentLocationViewController = AddLocationViewController()
-        performSegue(withIdentifier: "addLocation", sender: nil)
-    }
-    
 }
 
+//MARK:- TableView Controller to display the data
 extension StudentLocationTableViewController {
+    
+    //number of sections
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
+    //number of rows in each setction
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let students = students {
             return students.studentsList.count
         }
         return 0
     }
+    
+    //height of each row
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
     
+    //cell in each row
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userLocationCell", for: indexPath) as! StudentLocationsCell
         
@@ -130,8 +129,8 @@ extension StudentLocationTableViewController {
         return cell
     }
     
+    //tap functionality of each cell
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let app = UIApplication.shared
         if let toOpen = students?.studentsList[indexPath.row].mediaURL {
             openExternalLink(toOpen)
         }

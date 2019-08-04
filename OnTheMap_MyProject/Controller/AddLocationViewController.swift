@@ -6,12 +6,14 @@
 //  Copyright © 2019 Pranay Boggarapu. All rights reserved.
 //
 
-import Foundation
+
 import UIKit
 import MapKit
 
 class AddLocationViewController: UIViewController {
     
+    
+    //MARK:- Outlets
     @IBOutlet weak var activityViewIndicator: UIActivityIndicatorView!
     
     @IBOutlet weak var urlTextField: UITextField!
@@ -20,34 +22,36 @@ class AddLocationViewController: UIViewController {
     
     @IBOutlet weak var findLocationButton: UIButton!
     
+    //MARK:- Variables
     var geocoder = CLGeocoder()
     
     var userLocation = CLLocation()
     
     let annotation = MKPointAnnotation()
     
-    
+    //MARK:- View didload
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Add Location"
         addCancelNavBarButton()
         findLocationButton.layer.cornerRadius = 5
-        print("Student Add Location View Controller loaded")
         setPosting(false)
     }
     
-    
+    //MARK: Add Nav button
     func addCancelNavBarButton() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "CANCEL", style: .done, target: self, action: #selector(cancelButtonPressed))
         self.navigationController?.navigationBar.tintColor = UIColor(red: 30/255, green: 180/255, blue: 226/255, alpha: 1)
     }
     
+    //MARK: Handle find location
     @IBAction func findLocationPressed(_ sender: Any) {
         if validateAllDetailsEntered() {
             geoCodeUserLocation()
         }
     }
     
+    //MARK: Geocoding the value
     func geoCodeUserLocation() {
         setPosting(true)
         geocoder.geocodeAddressString(studentNameTextField.text!) {(placemarks, error) in
@@ -70,6 +74,7 @@ class AddLocationViewController: UIViewController {
         }
     }
     
+    //MARK: Client side error messaging for missing values
     func validateAllDetailsEntered() -> Bool {
         if studentNameTextField.text! == "" || urlTextField.text! == "" {
             displayErrorMessage(errorTitle: "Missing Details", errorMessage: "Location/URL details missing, please re-enter")
@@ -78,10 +83,9 @@ class AddLocationViewController: UIViewController {
         return true
     }
     
+    //MARK:- Process the Forward geocode response
     private func processResponse(withPlacemarks placemarks: [CLPlacemark]?, error: Error?) -> Bool {
-        if let error = error {
-            print("Unable to Forward Geocode Address (\(error))")
-            
+        if let _ = error {
             displayErrorMessage(errorTitle: "Error", errorMessage: "Unable to find the place you entered!!")
             return false
             
@@ -96,25 +100,22 @@ class AddLocationViewController: UIViewController {
                 annotation.coordinate = coordinate
                 annotation.title = studentNameTextField.text!
                 self.userLocation = location
-                print("location response fetch done")
                 return true
-            } else {
-                print("No Matching Location Found")
             }
             return false
         }
     }
     
+    //MARK:- Cancel button functionality
     @objc func cancelButtonPressed() {
         dismiss(animated: true, completion: nil)
     }
     
+    //MARK:- Animating
     func setPosting(_ isPosting: Bool) {
         if isPosting {
-            print("I started animating")
             activityViewIndicator.startAnimating()
         } else {
-            print("I stopped animating")
             activityViewIndicator.stopAnimating()
         }
         urlTextField.isEnabled = !isPosting

@@ -11,13 +11,17 @@ import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
+    
+    //MARK:- Outlets
     @IBOutlet weak var finishButton: UIButton!
     
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     
-    var isPosting: Bool = false
-    
     @IBOutlet weak var mkMapView: MKMapView!
+    
+    //MARK:- Variables
+    
+    var isPosting: Bool = false
     
     var locationManager = CLLocationManager()
     
@@ -29,10 +33,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     var annotations: [MKPointAnnotation] = []
     
-    
+    //MARK:- View did load
     override func viewDidLoad() {
         setPosting(false)
-        print("Map View Controller loaded")
         super.viewDidLoad()
         finishButton.layer.cornerRadius = 5
         mkMapView.showsUserLocation = true
@@ -43,11 +46,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 2000, longitudinalMeters: 2000)
 
         mkMapView.setRegion(region, animated: true)
-        
     }
     
     
-    
+    //MARK:- did update user location method
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         mkMapView.centerCoordinate = userLocation.location!.coordinate
     }
@@ -73,11 +75,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         return pinView
     }
     
+    //MARK:- Finish Location creation
     @IBAction func finishLocationCreation(_ sender: Any){
         setPosting(true)
         UdacityAPIClient.postLocation(userLocation: userLocationEntered, mediaURL: userURLEntered, location: location, completionHandler: handlePostLocationResponse(_:_:_:))
     }
     
+    //MARK:- Handle Post location response
     func handlePostLocationResponse(_ successFul: Bool, _ response: StudentLocationPostResponse?, _ error: Error?) {
         if !successFul {
             DispatchQueue.main.async {
@@ -90,12 +94,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
+    //MARK:- animation
     func setPosting(_ isPosting: Bool) {
         if isPosting {
-            print("I started animating")
             activityIndicatorView.startAnimating()
         } else {
-            print("I stopped animating")
             activityIndicatorView.stopAnimating()
         }
         finishButton.isEnabled = !isPosting

@@ -9,12 +9,15 @@
 import UIKit
 
 extension UIViewController {
+    
+    //Display error message - generic method
     func displayErrorMessage(errorTitle: String, errorMessage: String) {
         let alert = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     
+    //Opening a hyperlink in a webview
     func openExternalLink(_ url: String) {
         guard let url = URL(string: url), UIApplication.shared.canOpenURL(url) else {
             displayErrorMessage(errorTitle: "Error", errorMessage: "Not a valid website/URL")

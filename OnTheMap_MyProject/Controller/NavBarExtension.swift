@@ -27,6 +27,6 @@ extension UIViewController {
     }
     
     @objc func addButtonPressed() {
-        print("Add Button Pressed")
+        performSegue(withIdentifier: "addLocation", sender: nil)
     }
 }
