@@ -22,7 +22,7 @@ enum Endpoints {
     var stringValue: String {
         switch self {
         case .validateLoginViaPOST: return Endpoints.base + "session"
-        case .getListOfStudentLocations: return Endpoints.base + "StudentLocation?order=-updatedAt"
+        case .getListOfStudentLocations: return Endpoints.base + "StudentLocation?order=-updatedAt&limit=100"
         case .getLoggedInUserDetails(let userKey): return Endpoints.base + "users/\(userKey)"
         case .postStudentDetails: return Endpoints.base + "StudentLocation"
         case .logOutUser: return Endpoints.base + "session"

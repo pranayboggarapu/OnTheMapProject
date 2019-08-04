@@ -25,12 +25,12 @@ class StudentLocationMapViewController: UIViewController, MKMapViewDelegate {
     //MARK:- View load and appear
     override func viewDidLoad() {
         super.viewDidLoad()
+        setLoading(false)
         fetchListOfStudents()
         navigationItem.title = "On the Map"
         addNavBarButtons()
         mkMapView.showsUserLocation = true
         mkMapView.delegate = self
-        setLoading(false)
     }
     
     override func viewDidAppear(_ animated: Bool) {

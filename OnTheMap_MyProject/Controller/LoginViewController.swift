@@ -87,7 +87,7 @@ class LoginViewController: UIViewController {
             //service failure
             DispatchQueue.main.async {
                 self.setLoggingIn(false)
-                self.displayErrorMessage(errorTitle: "Error!!", errorMessage: "An unforeseen error occured. Please try again.")
+                self.displayErrorMessage(errorTitle: "Error!!", errorMessage: "UserName/password incorrect. Please try again!!")
             }
         }
     }

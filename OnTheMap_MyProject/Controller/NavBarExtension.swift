@@ -15,7 +15,7 @@ extension UIViewController {
         self.navigationController?.navigationBar.tintColor = UIColor(red: 30/255, green: 180/255, blue: 226/255, alpha: 1)
         let refreshButtonItem = UIBarButtonItem(image: UIImage(imageLiteralResourceName: "icon_refresh"), style: .done, target: self, action: #selector(refreshButtonPressed))
         let addButtonItem = UIBarButtonItem(image: UIImage(imageLiteralResourceName: "icon_addpin"), style: .done, target: self, action: #selector(addButtonPressed))
-        navigationItem.rightBarButtonItems = [refreshButtonItem, addButtonItem]
+        navigationItem.rightBarButtonItems = [addButtonItem, refreshButtonItem]
     }
     
     @objc func logOutButtonPressed() {
