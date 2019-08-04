@@ -53,7 +53,6 @@ class LoginViewController: UIViewController {
         userNameTextField.isEnabled = !loggingIn
         passwordTextField.isEnabled = !loggingIn
         loginButton.isEnabled = !loggingIn
-        signUpCompleteLabel.isEditable = !loggingIn
     }
     
     func validateLoginResponse(success: Bool, loginOutput: LoginOutput?, error: Error?) {
@@ -99,7 +98,7 @@ extension LoginViewController: UITextViewDelegate {
     func setupSignUpLink() {
         let displayString = "Don't have an account? Sign Up"
         let attributedString = NSMutableAttributedString(string: displayString)
-        attributedString.addAttribute(.link, value: "https://www.hackingwithswift.com", range: NSRange(location: 23, length: 7))
+        attributedString.addAttribute(.link, value: "https://www.udacity.com/account/auth#!/signup", range: NSRange(location: 23, length: 7))
         attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 16), range: NSRange(location: 0, length: displayString.count))
         signUpCompleteLabel.attributedText = attributedString
     }

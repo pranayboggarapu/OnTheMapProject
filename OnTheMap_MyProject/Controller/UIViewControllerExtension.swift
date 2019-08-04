@@ -14,4 +14,12 @@ extension UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    func openExternalLink(_ url: String) {
+        guard let url = URL(string: url), UIApplication.shared.canOpenURL(url) else {
+            displayErrorMessage(errorTitle: "Error", errorMessage: "Not a valid website/URL")
+            return
+        }
+        UIApplication.shared.open(url, options: [:])
+    }
 }

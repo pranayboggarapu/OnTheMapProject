@@ -129,4 +129,11 @@ extension StudentLocationTableViewController {
         cell.studentImageView.image = UIImage(imageLiteralResourceName: "icon_pin")
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let app = UIApplication.shared
+        if let toOpen = students?.studentsList[indexPath.row].mediaURL {
+            openExternalLink(toOpen)
+        }
+    }
 }

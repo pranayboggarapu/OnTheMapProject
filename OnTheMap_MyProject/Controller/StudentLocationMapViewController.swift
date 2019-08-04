@@ -28,7 +28,7 @@ class StudentLocationMapViewController: UIViewController, MKMapViewDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        refreshButtonPressed()
+            refreshButtonPressed()
     }
     
     func fetchListOfStudents() {
@@ -99,7 +99,7 @@ class StudentLocationMapViewController: UIViewController, MKMapViewDelegate {
         if control == view.rightCalloutAccessoryView {
             let app = UIApplication.shared
             if let toOpen = view.annotation?.subtitle! {
-                app.openURL(URL(string: toOpen)!)
+                openExternalLink(toOpen)
             }
         }
     }
