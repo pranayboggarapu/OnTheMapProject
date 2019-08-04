@@ -115,10 +115,25 @@
                     <view key="view" contentMode="scaleToFill" id="ccf-1a-L4c">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="87E-fD-bNl">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="87E-fD-bNl" firstAttribute="bottom" secondItem="ASr-fL-gfc" secondAttribute="bottom" id="TcU-KL-VCO"/>
+                            <constraint firstItem="87E-fD-bNl" firstAttribute="trailing" secondItem="ASr-fL-gfc" secondAttribute="trailing" id="XTe-rB-ep1"/>
+                            <constraint firstItem="87E-fD-bNl" firstAttribute="top" secondItem="ASr-fL-gfc" secondAttribute="top" id="csy-CS-vAr"/>
+                            <constraint firstItem="87E-fD-bNl" firstAttribute="leading" secondItem="ASr-fL-gfc" secondAttribute="leading" id="gzw-No-F1g"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="ASr-fL-gfc"/>
                     </view>
                     <navigationItem key="navigationItem" id="7Hj-GP-ljV"/>
+                    <connections>
+                        <outlet property="mkMapView" destination="87E-fD-bNl" id="sCP-L3-Q1Y"/>
+                        <segue destination="sRP-m2-5kg" kind="presentation" identifier="addLocationFromMap" id="h2R-GR-kmJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="saw-eo-l60" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -398,4 +413,7 @@
         <image name="icon_world" width="52" height="67"/>
         <image name="logo-u" width="62" height="62"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="h2R-GR-kmJ"/>
+    </inferredMetricsTieBreakers>
 </document>

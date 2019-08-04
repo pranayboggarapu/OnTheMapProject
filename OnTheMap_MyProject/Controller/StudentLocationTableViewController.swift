@@ -99,10 +99,7 @@ class StudentLocationTableViewController: UITableViewController {
     override func addButtonPressed() {
         print("Add button Pressed in Student Table View Location controller")
         let addStudentLocationViewController = AddLocationViewController()
-        
         performSegue(withIdentifier: "addLocation", sender: nil)
-        
-        
     }
     
 }

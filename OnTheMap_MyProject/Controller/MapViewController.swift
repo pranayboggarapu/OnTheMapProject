@@ -13,7 +13,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @IBOutlet weak var finishButton: UIButton!
     
-    
     @IBOutlet weak var mkMapView: MKMapView!
     
     var locationManager = CLLocationManager()

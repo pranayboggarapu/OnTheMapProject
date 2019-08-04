@@ -27,6 +27,12 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        userNameTextField.text = ""
+        passwordTextField.text = ""
+    }
+    
     @IBAction func handleLogin(_ sender: Any) {
         print("handle login called")
         setLoggingIn(true)
@@ -62,6 +68,8 @@ class LoginViewController: UIViewController {
             UdacityAPIClient.getLoggedInStudentDetails(UdacityAPIClient.UserAuth.accountId, completionHandler: handleUserDetailsFetchResponse(_:error:))
             DispatchQueue.main.async {
                 self.setLoggingIn(false)
+                self.userNameTextField.text = ""
+                self.passwordTextField.text = ""
                 self.performSegue(withIdentifier: "loginSuccessfull", sender: nil)
             }
 
