@@ -21,5 +21,16 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "MapViewController.viewDidLoad():MapViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "region">
+            </PersistentString>
+            <PersistentString
+               value = "MKCoordinateRegion">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

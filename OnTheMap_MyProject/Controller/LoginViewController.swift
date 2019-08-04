@@ -31,17 +31,11 @@ class LoginViewController: UIViewController {
         print("handle login called")
         setLoggingIn(true)
         if userNameTextField.text == "" || passwordTextField.text == "" {
-            displayErrorMessage(errorTitle: "Missing Credentials!!", errorMessage: "UserName/Password not entered.")
             setLoggingIn(false)
+            displayErrorMessage(errorTitle: "Missing Credentials!!", errorMessage: "UserName/Password not entered.")
             return
         }
         UdacityAPIClient.validateLogin(userName: userNameTextField.text!, password: passwordTextField.text!, completionHandler: validateLoginResponse)
-    }
-    
-    func displayErrorMessage(errorTitle: String, errorMessage: String) {
-        let alert = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
     }
     
     func setLoggingIn(_ loggingIn: Bool) {
@@ -57,16 +51,37 @@ class LoginViewController: UIViewController {
     }
     
     func validateLoginResponse(success: Bool, loginOutput: LoginOutput?, error: Error?) {
-        setLoggingIn(false)
         if success {
             if !(loginOutput?.account.isUserRegistered)! {
-                displayErrorMessage(errorTitle: "UnRegistered User", errorMessage: "User not registered")
+                DispatchQueue.main.async {
+                    self.setLoggingIn(false)
+                    self.displayErrorMessage(errorTitle: "UnRegistered User", errorMessage: "User not registered")
+                }
             }
-            UdacityAPIClient.UserAuth.accountId = (loginOutput?.account.userKey)!
-            UdacityAPIClient.UserAuth.sessionId = (loginOutput?.session.sessionId)!
             print("User successfully authenticated")
+            UdacityAPIClient.getLoggedInStudentDetails(UdacityAPIClient.UserAuth.accountId, completionHandler: handleUserDetailsFetchResponse(_:error:))
+            DispatchQueue.main.async {
+                self.setLoggingIn(false)
+                self.performSegue(withIdentifier: "loginSuccessfull", sender: nil)
+            }
+
         } else {
-            displayErrorMessage(errorTitle: "Error", errorMessage: "An unforeseen error occured. Please try again!!")
+            DispatchQueue.main.async {
+                self.setLoggingIn(false)
+                self.displayErrorMessage(errorTitle: "Error!!", errorMessage: "An unforeseen error occured. Please try again.")
+            }
+        }
+    }
+    
+    func handleUserDetailsFetchResponse(_ success: Bool, error: Error?) {
+        if success {
+            print("User Details successfully fetched")
+        } else {
+            DispatchQueue.main.async {
+                self.setLoggingIn(false)
+                self.displayErrorMessage(errorTitle: "Error!!", errorMessage: "Unable to fetch user details")
+            }
+            
         }
     }
 }
