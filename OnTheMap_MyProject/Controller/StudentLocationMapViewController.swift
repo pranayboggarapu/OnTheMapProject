@@ -11,6 +11,8 @@ import MapKit
 
 class StudentLocationMapViewController: UIViewController, MKMapViewDelegate {
     
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    
     @IBOutlet weak var mkMapView: MKMapView!
     
     var annotations: [MKPointAnnotation] = []
@@ -25,6 +27,7 @@ class StudentLocationMapViewController: UIViewController, MKMapViewDelegate {
         print("Student Location Map View Controller loaded")
         mkMapView.showsUserLocation = true
         mkMapView.delegate = self
+        setLoading(false)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -40,10 +43,17 @@ class StudentLocationMapViewController: UIViewController, MKMapViewDelegate {
         if success {
             self.students = students
             generateAnnotations()
-            self.mkMapView.addAnnotations(annotations)
+            DispatchQueue.main.async {
+                self.setLoading(false)
+                self.mkMapView.addAnnotations(self.annotations)
+            }
+            
             
         } else {
-            displayErrorMessage(errorTitle: "Error!!", errorMessage: "An unforeseen error occured. Please try again.")
+            DispatchQueue.main.async {
+                self.setLoading(false)
+                self.displayErrorMessage(errorTitle: "Error!!", errorMessage: "An unforeseen error occured. Please try again.")
+            }
         }
         
     }
@@ -105,18 +115,22 @@ class StudentLocationMapViewController: UIViewController, MKMapViewDelegate {
     }
     
     override func refreshButtonPressed() {
+        setLoading(true)
         fetchListOfStudents()
     }
     
     override func logOutButtonPressed() {
+        setLoading(true)
         UdacityAPIClient.logOutUser { (success, error) in
             if success {
                 DispatchQueue.main.async {
+                    self.setLoading(false)
                     self.dismiss(animated: true, completion: nil)
                 }
                 
             } else {
                 DispatchQueue.main.async {
+                    self.setLoading(false)
                     self.displayErrorMessage(errorTitle: "Error", errorMessage: "Unable to logout. Please try again!!")
                 }
                 
@@ -128,6 +142,16 @@ class StudentLocationMapViewController: UIViewController, MKMapViewDelegate {
         print("Add button Pressed in Student Table View Location controller")
         let addStudentLocationViewController = AddLocationViewController()
         performSegue(withIdentifier: "addLocationFromMap", sender: nil)
+    }
+    
+    func setLoading(_ isLoading: Bool) {
+        if isLoading {
+            print("I started animating")
+            activityIndicatorView.startAnimating()
+        } else {
+            print("I stopped animating")
+            activityIndicatorView.stopAnimating()
+        }
     }
     
 }

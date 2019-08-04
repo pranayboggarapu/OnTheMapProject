@@ -28,7 +28,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Iey-FZ-kqQ">
                                 <rect key="frame" x="70" y="270" width="235" height="140"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="pranayboggarapu@gmail.com" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HVI-3o-HQl">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HVI-3o-HQl">
                                         <rect key="frame" x="0.0" y="0.0" width="235" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="3FY-1f-Qup"/>
@@ -37,7 +37,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="149257@UPwd" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3T1-L2-S8k">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3T1-L2-S8k">
                                         <rect key="frame" x="0.0" y="50" width="235" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="g5t-dm-l2V"/>
@@ -119,18 +119,29 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="87E-fD-bNl">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                             </mapView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="yvk-FS-j9S">
+                                <rect key="frame" x="127.5" y="273.5" width="120" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="Dg1-bQ-3DD"/>
+                                    <constraint firstAttribute="height" constant="120" id="eym-b5-ezB"/>
+                                </constraints>
+                                <color key="color" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="yvk-FS-j9S" firstAttribute="centerX" secondItem="ccf-1a-L4c" secondAttribute="centerX" id="SUD-3N-8go"/>
                             <constraint firstItem="87E-fD-bNl" firstAttribute="bottom" secondItem="ASr-fL-gfc" secondAttribute="bottom" id="TcU-KL-VCO"/>
                             <constraint firstItem="87E-fD-bNl" firstAttribute="trailing" secondItem="ASr-fL-gfc" secondAttribute="trailing" id="XTe-rB-ep1"/>
                             <constraint firstItem="87E-fD-bNl" firstAttribute="top" secondItem="ASr-fL-gfc" secondAttribute="top" id="csy-CS-vAr"/>
                             <constraint firstItem="87E-fD-bNl" firstAttribute="leading" secondItem="ASr-fL-gfc" secondAttribute="leading" id="gzw-No-F1g"/>
+                            <constraint firstItem="yvk-FS-j9S" firstAttribute="centerY" secondItem="ccf-1a-L4c" secondAttribute="centerY" id="njb-ph-iaE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ASr-fL-gfc"/>
                     </view>
                     <navigationItem key="navigationItem" id="7Hj-GP-ljV"/>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="yvk-FS-j9S" id="7pC-54-SOm"/>
                         <outlet property="mkMapView" destination="87E-fD-bNl" id="sCP-L3-Q1Y"/>
                         <segue destination="sRP-m2-5kg" kind="presentation" identifier="addLocationFromMap" id="h2R-GR-kmJ"/>
                     </connections>
@@ -260,13 +271,13 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="vlT-l2-LmH">
                                 <rect key="frame" x="80" y="264" width="215" height="130"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Fremont, CA" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m8i-EZ-WIK">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m8i-EZ-WIK">
                                         <rect key="frame" x="0.0" y="0.0" width="215" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="www.com" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eLi-UI-YDW">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eLi-UI-YDW">
                                         <rect key="frame" x="0.0" y="50" width="215" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -284,6 +295,14 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="dYr-ug-Ndf">
+                                <rect key="frame" x="127.5" y="273.5" width="120" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="MJy-pc-kp4"/>
+                                    <constraint firstAttribute="width" constant="120" id="PMz-d6-uMa"/>
+                                </constraints>
+                                <color key="color" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -292,11 +311,14 @@
                             <constraint firstItem="vlT-l2-LmH" firstAttribute="leading" secondItem="d87-oO-kMP" secondAttribute="leading" constant="80" id="KWZ-bv-Ne9"/>
                             <constraint firstItem="zUp-I7-zSk" firstAttribute="top" secondItem="d87-oO-kMP" secondAttribute="top" constant="80" id="Lb8-MK-d79"/>
                             <constraint firstItem="zUp-I7-zSk" firstAttribute="centerX" secondItem="lNf-5V-mEq" secondAttribute="centerX" id="Mr1-BY-Zis"/>
+                            <constraint firstItem="dYr-ug-Ndf" firstAttribute="centerY" secondItem="lNf-5V-mEq" secondAttribute="centerY" id="qAa-hr-L3L"/>
+                            <constraint firstItem="dYr-ug-Ndf" firstAttribute="centerX" secondItem="lNf-5V-mEq" secondAttribute="centerX" id="r7N-6R-FzB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="d87-oO-kMP"/>
                     </view>
                     <navigationItem key="navigationItem" id="bWO-bd-Q4e"/>
                     <connections>
+                        <outlet property="activityViewIndicator" destination="dYr-ug-Ndf" id="CiZ-Dy-nqy"/>
                         <outlet property="findLocationButton" destination="Zi2-hU-WJZ" id="Gwt-b3-ll0"/>
                         <outlet property="studentNameTextField" destination="m8i-EZ-WIK" id="MeK-uT-ahe"/>
                         <outlet property="urlTextField" destination="eLi-UI-YDW" id="TBJ-K9-USt"/>
@@ -328,6 +350,14 @@
                                     <action selector="finishLocationCreation:" destination="OMT-tr-RRM" eventType="touchUpInside" id="Hx6-YP-Jzl"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="aXm-oo-QCo">
+                                <rect key="frame" x="127.5" y="273.5" width="120" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="eJ1-AK-5AN"/>
+                                    <constraint firstAttribute="width" constant="120" id="kt1-Rc-fiR"/>
+                                </constraints>
+                                <color key="color" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -335,14 +365,17 @@
                             <constraint firstItem="D69-Bh-utj" firstAttribute="trailing" secondItem="D4K-Hh-flA" secondAttribute="trailing" constant="40" id="5dw-Kq-JLJ"/>
                             <constraint firstItem="D69-Bh-utj" firstAttribute="bottom" secondItem="D4K-Hh-flA" secondAttribute="bottom" constant="40" id="7ff-lU-wB5"/>
                             <constraint firstItem="7al-Sa-U6x" firstAttribute="top" secondItem="D69-Bh-utj" secondAttribute="top" id="F3Z-nv-WEc"/>
+                            <constraint firstItem="aXm-oo-QCo" firstAttribute="centerX" secondItem="wBa-en-a0X" secondAttribute="centerX" id="MjZ-Wz-6t1"/>
                             <constraint firstItem="7al-Sa-U6x" firstAttribute="trailing" secondItem="D69-Bh-utj" secondAttribute="trailing" id="UWS-UO-MSF"/>
                             <constraint firstItem="7al-Sa-U6x" firstAttribute="bottom" secondItem="D69-Bh-utj" secondAttribute="bottom" id="YYv-sN-mFg"/>
                             <constraint firstItem="7al-Sa-U6x" firstAttribute="leading" secondItem="D69-Bh-utj" secondAttribute="leading" id="lIE-Th-POF"/>
+                            <constraint firstItem="aXm-oo-QCo" firstAttribute="centerY" secondItem="wBa-en-a0X" secondAttribute="centerY" id="sJ4-ux-YvS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="D69-Bh-utj"/>
                     </view>
                     <navigationItem key="navigationItem" id="sKy-dG-rN5"/>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="aXm-oo-QCo" id="cEP-5w-JBy"/>
                         <outlet property="finishButton" destination="D4K-Hh-flA" id="myy-fR-pbi"/>
                         <outlet property="mkMapView" destination="7al-Sa-U6x" id="s93-2r-DMM"/>
                     </connections>

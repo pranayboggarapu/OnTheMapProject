@@ -14,11 +14,11 @@ class StudentLocationTableViewController: UITableViewController {
     
 //    var loadingView: UIView = UIView()
     
-    var spinner = UIActivityIndicatorView()
+    var spinner = UIActivityIndicatorView(style: .whiteLarge)
     
     
     override func viewDidLoad() {
-        
+        spinner.color = UIColor.darkGray
         super.viewDidLoad()
         tableView.reloadData()
         navigationItem.title = "On the Map"
@@ -74,12 +74,12 @@ class StudentLocationTableViewController: UITableViewController {
     // Set the activity indicator into the main view
     private func setLoadingScreen() {
         
-        spinner = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 300, height:300))
+        spinner = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 120, height:120))
+        spinner.style = .whiteLarge
         spinner.color = UIColor.darkGray
         
-        self.spinner.center = CGPoint(x:UIScreen.main.bounds.size.width / 2, y:UIScreen.main.bounds.size.height / 2)
-        
-        spinner.style = .gray
+        self.spinner.center = CGPoint(x:self.view.center.x, y:self.view.center.y)
+    
         spinner.contentMode = .scaleAspectFit
         
         spinner.startAnimating()

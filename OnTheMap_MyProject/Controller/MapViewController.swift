@@ -13,6 +13,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @IBOutlet weak var finishButton: UIButton!
     
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    
+    var isPosting: Bool = false
+    
     @IBOutlet weak var mkMapView: MKMapView!
     
     var locationManager = CLLocationManager()
@@ -27,6 +31,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     
     override func viewDidLoad() {
+        setPosting(false)
         print("Map View Controller loaded")
         super.viewDidLoad()
         finishButton.layer.cornerRadius = 5
@@ -69,35 +74,30 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     @IBAction func finishLocationCreation(_ sender: Any){
-    
-        //IMPLEMENT POST CALL
+        setPosting(true)
         UdacityAPIClient.postLocation(userLocation: userLocationEntered, mediaURL: userURLEntered, location: location, completionHandler: handlePostLocationResponse(_:_:_:))
-        
     }
     
     func handlePostLocationResponse(_ successFul: Bool, _ response: StudentLocationPostResponse?, _ error: Error?) {
         if !successFul {
             DispatchQueue.main.async {
-                
+                self.setPosting(false)
                 self.displayErrorMessage(errorTitle: "Error", errorMessage: "Unable to post user's location, Please try again after sometime!!")
             }
         } else {
+            self.setPosting(false)
             self.dismiss(animated: true, completion: nil)
         }
     }
     
-   
-    // This delegate method is implemented to respond to taps. It opens the system browser
-    // to the URL specified in the annotationViews subtitle property.
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        if control == view.rightCalloutAccessoryView {
-            let app = UIApplication.shared
-//            if let toOpen = view.annotation?.subtitle! {
-//                app.openURL(URL(string: toOpen)!)
-//            }
-            print("Im tapped")
+    func setPosting(_ isPosting: Bool) {
+        if isPosting {
+            print("I started animating")
+            activityIndicatorView.startAnimating()
+        } else {
+            print("I stopped animating")
+            activityIndicatorView.stopAnimating()
         }
+        finishButton.isEnabled = !isPosting
     }
-    
-    
 }

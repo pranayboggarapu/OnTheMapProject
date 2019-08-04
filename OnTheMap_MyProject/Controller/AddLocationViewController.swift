@@ -12,6 +12,8 @@ import MapKit
 
 class AddLocationViewController: UIViewController {
     
+    @IBOutlet weak var activityViewIndicator: UIActivityIndicatorView!
+    
     @IBOutlet weak var urlTextField: UITextField!
     
     @IBOutlet weak var studentNameTextField: UITextField!
@@ -31,6 +33,7 @@ class AddLocationViewController: UIViewController {
         addCancelNavBarButton()
         findLocationButton.layer.cornerRadius = 5
         print("Student Add Location View Controller loaded")
+        setPosting(false)
     }
     
     
@@ -46,9 +49,11 @@ class AddLocationViewController: UIViewController {
     }
     
     func geoCodeUserLocation() {
+        setPosting(true)
         geocoder.geocodeAddressString(studentNameTextField.text!) {(placemarks, error) in
             if self.processResponse(withPlacemarks: placemarks, error: error) {
                 DispatchQueue.main.async {
+                    self.setPosting(false)
                     let mapViewController = self.storyboard?.instantiateViewController(withIdentifier: "mapViewController") as! MapViewController
                     mapViewController.location = self.userLocation
                     mapViewController.userLocationEntered = self.studentNameTextField.text!
@@ -58,6 +63,7 @@ class AddLocationViewController: UIViewController {
                 }
             } else {
                 DispatchQueue.main.async {
+                    self.setPosting(false)
                     self.displayErrorMessage(errorTitle: "Error", errorMessage: "Unable to find the place you entered!!")
                 }
             }
@@ -101,5 +107,18 @@ class AddLocationViewController: UIViewController {
     
     @objc func cancelButtonPressed() {
         dismiss(animated: true, completion: nil)
+    }
+    
+    func setPosting(_ isPosting: Bool) {
+        if isPosting {
+            print("I started animating")
+            activityViewIndicator.startAnimating()
+        } else {
+            print("I stopped animating")
+            activityViewIndicator.stopAnimating()
+        }
+        urlTextField.isEnabled = !isPosting
+        studentNameTextField.isEnabled = !isPosting
+        findLocationButton.isEnabled = !isPosting
     }
 }
